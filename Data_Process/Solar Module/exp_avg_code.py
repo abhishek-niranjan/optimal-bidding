@@ -18,7 +18,7 @@ df['row_sum'] = df.sum(axis=1).values
 
 # calculating exponential moving average
 
-df['exp_ma'] = df['row_sum'].ewm(span=20, adjust=False).mean()
+df['exp_ma'] = df['row_sum'].ewm(halflife=20, adjust=False).mean()
 #pd.ewma(df['row_sum'], span=20, adjust=False)
 
 # dumping processed dataframe
