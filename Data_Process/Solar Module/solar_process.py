@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec  4 21:12:31 2017
 
-@author: DELL-PC
-"""
 import os
 import pandas as pd
 import pickle
@@ -43,7 +38,7 @@ for index, row  in pred_df.iterrows():
             curr = [pred_df.iloc[index,i]]
             hour = [i]
             slope = [pred_df.iloc[index,i] - pred_df.iloc[index,i-1]]
-            slope2 = [act_df.iloc[index,i]-act_df.iloc[index,i-1]]
+            # slope2 = [act_df.iloc[index,i]-act_df.iloc[index,i-1]]
             actual = [act_df.iloc[index,i]]
             exp_ma = [0]#get_exp_ma(pred_df[:index])
             temp = list(zip(t1,t2,t3,t4,t5,t6,t7,exp_ma,hour,slope,curr, actual))
