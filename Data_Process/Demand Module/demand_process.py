@@ -15,7 +15,7 @@ dataset = pd.read_csv(file)
 
 # dropping first stray column
 
-dataset = dataset.drop(dataset.columns[0], axis=1)
+#dataset = dataset.drop(dataset.columns[0], axis=1)
 
 # building required dictionary
 
