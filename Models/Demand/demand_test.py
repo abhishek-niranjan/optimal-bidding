@@ -26,6 +26,6 @@ model = gl.load_model('demand_module')
 preds = model.predict(test_data)
 preds = pd.DataFrame(np.asarray(preds), columns=['demand_model'])
 # preds['demand_model'] = preds['demand_model'].apply(lambda x: 0 if x<=0 else x)
-preds.to_csv('demand_test2.csv',index=False)
+preds.to_csv('demand_test.csv',index=False)
 print preds.head()
 
