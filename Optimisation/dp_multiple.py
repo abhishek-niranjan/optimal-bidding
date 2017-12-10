@@ -2,8 +2,9 @@ import os
 import sys
 import numpy as np
 import pandas as pd
+import math
 
-no_days = 50
+no_days = 1
 
 vec_data = pd.read_csv('../DataSets/All_Vector.csv')
 print vec_data.head()
@@ -14,7 +15,6 @@ solar = list(vec_data['solar_act'])
 solar = solar[:24*no_days]
 demand = list(vec_data['demand_act'])
 demand = demand[:24*no_days]
-
 
 
 
@@ -38,13 +38,14 @@ for i in range(6):
 for i in range(1,24*no_days):
 	if(demand[i]<0):
 		excess = int(abs(demand[i]))
+		excess = min(excess, 5)
 		for j in range(26):
 			if(j==0):
 				cost[i][j] = cost[i-1][j]
 				continue
 			iterate = min(excess, j)
 			for k in range(iterate+1):
-				cost[i][j] = min(cost[i][j],cost[i][j-k])
+				cost[i][j] = min(cost[i][j],cost[i-1][j-k])
 	else:
 		for j in range(26):
 			if(j==0):
@@ -139,7 +140,7 @@ for i in range(1,24*no_days):
 				# 	battery[i][j] = j
 
 curr_day = 1
-# print min(cost[-1])
+print min(cost[-1])
 days_tot = []
 while(curr_day<=no_days):
 	days_tot.append(min(cost[24*curr_day-1]))
@@ -151,5 +152,5 @@ days_val[0] = days_tot[0]
 for i in range(1, len(days_tot)):
 	days_val[i] = days_tot[i]-days_tot[i-1]
 
-for i, item in enumerate(days_val):
-	print i, item
+# for i, item in enumerate(days_val):
+# 	print i, item

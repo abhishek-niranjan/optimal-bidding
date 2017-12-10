@@ -3,7 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 
-no_days = 3
+no_days = 1
 
 vec_data = pd.read_csv('../DataSets/All_Vector.csv')
 print vec_data.head()
