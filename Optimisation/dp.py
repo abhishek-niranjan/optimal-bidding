@@ -7,12 +7,13 @@ no_days = 3
 
 vec_data = pd.read_csv('../DataSets/All_Vector.csv')
 print vec_data.head()
+vec_data['price_act'] = vec_data['price_act'].apply(lambda x: 7 if x>7 else x)
 price = list(vec_data['price_act'])
-price = price[:72]
+price = price[:24*no_days]
 solar = list(vec_data['solar_act'])
-solar = solar[:72]
+solar = solar[:24*no_days]
 demand = list(vec_data['demand_act'])
-demand = demand[:72]
+demand = demand[:24*no_days]
 
 
 
@@ -21,15 +22,18 @@ demand = list(np.asarray(demand) - np.asarray(solar))
 # print demand
 
 print len(price), len(solar), len(demand)
-cost = [[0 for y in range(6)] for x in range(24*no_days)]
-battery = [[0 for y in range(6)] for x in range(24*no_days)]
+cost = [[sys.maxint for y in range(6)] for x in range(24*no_days)]
+battery = [[sys.maxint for y in range(6)] for x in range(24*no_days)]
 path = []
+
 
 ##### Fill for the first hour ######
 for i in range(6):
 	cost[0][i] = sys.maxint
 for i in range(2):
 	cost[0][i] = price[0]*(demand[0]+5*i)
+
+
 
 for i in range(1,24*no_days):
 	for j in range(6):
@@ -53,6 +57,11 @@ for i in range(1,24*no_days):
 
 print  cost[24*no_days-1]
 
+
+
+##################  Checking the Path  #########################
+
+"""
 # for i,item in enumerate(cost):
 # 	print demand[i]
 # 	print item
@@ -70,6 +79,7 @@ print  cost[24*no_days-1]
 # 	i -=1
 
 # print path[::-1]
+"""
 
 
-
+#################################################################
