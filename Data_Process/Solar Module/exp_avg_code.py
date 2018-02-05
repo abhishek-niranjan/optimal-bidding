@@ -9,7 +9,9 @@ import pandas as pd
 
 # importing data to dataframe
 
-solar_pred = '../../DataSets/Solar_Train_Pred.csv'
+# solar_pred = '../../DataSets/Solar_Train_Pred.csv'
+solar_pred = '../../DataSets/Data_TestSet_PrivateEvaluation/Solar_Test_pred.csv'  ### For leaderboard
+
 df = pd.read_csv(solar_pred)
 
 # creating row wise sum column
@@ -23,5 +25,7 @@ df['exp_ma'] = df['row_sum'].ewm(halflife=20, adjust=False).mean()
 
 # dumping processed dataframe
 
-file_name = '../../DataSets/Solar_Train_Pred_processed(exp_ma).csv'
+# file_name = '../../DataSets/Solar_ema.csv'
+file_name = '../../DataSets/Data_TestSet_PrivateEvaluation/Solar_ema.csv'  ### For leaderboard
+
 df.to_csv(file_name, sep=',', index=False)
